@@ -182,7 +182,7 @@ class ApproximateQAgent(PacmanQAgent):
         "*** YOUR CODE HERE ***"
         feats = self.featExtractor.getFeatures(state, action)
         #print(feats)
-        return sum([self.weights[feat] * value for feat, value in feats.iteritems()])
+        return sum([self.weights[feat] * value for feat, value in feats.items()])
 
     def update(self, state, action, nextState, reward):
         """
@@ -191,11 +191,12 @@ class ApproximateQAgent(PacmanQAgent):
         "*** YOUR CODE HERE ***"
         feats = self.featExtractor.getFeatures(state, action)
         diff = (reward + self.discount * self.computeValueFromQValues(nextState)) - self.getQValue(state, action)
-        for feat, _ in feats.iteritems():
+        for feat, _ in feats.items():
           self.weights[feat] += self.alpha * diff * feats[feat]      
 
     def final(self, state):
         "Called at the end of each game."
+
         # call the super-class final method
         PacmanQAgent.final(self, state)
 
